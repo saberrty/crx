@@ -1,8 +1,8 @@
 {
     "manifest_version": 2,
-    "name": "Jartto's Demo",
+    "name": "Crx demo",
     "description": "My first chrome extension.",
-    "version": "1.0.0",
+    "version": "0.0.1",
     "icons": {
         "16": "image/icon-16.png",
         "128": "image/icon-128.png"
@@ -12,7 +12,7 @@
             "19": "image/icon-38.png",
             "38": "image/icon-19.png"
         },
-        "default_title": "Jartto's Demo",
+        "default_title": "Crx Demo",
         "default_popup": "index.html"
     },
     "permissions": [
