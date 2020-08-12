@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@babel/core": "7.9.0",
+    "@babel/plugin-proposal-decorators": "^7.10.5",
     "@svgr/webpack": "4.3.3",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
@@ -11,6 +12,7 @@
     "@typescript-eslint/eslint-plugin": "^2.10.0",
     "@typescript-eslint/parser": "^2.10.0",
     "antd": "^4.5.3",
+    "axios": "^0.19.2",
     "babel-eslint": "10.1.0",
     "babel-jest": "^24.9.0",
     "babel-loader": "8.1.0",
@@ -39,6 +41,7 @@
     "jest-watch-typeahead": "0.4.2",
     "mini-css-extract-plugin": "0.9.0",
     "mobx": "^5.15.5",
+    "mobx-decorators": "^6.0.1",
     "mobx-react": "^6.2.5",
     "optimize-css-assets-webpack-plugin": "5.0.3",
     "pnp-webpack-plugin": "1.6.4",
@@ -55,6 +58,7 @@
     "resolve-url-loader": "3.1.1",
     "sass-loader": "8.0.2",
     "semver": "6.3.0",
+    "spark-md5": "^3.0.1",
     "style-loader": "0.23.1",
     "styled-components": "^5.1.1",
     "terser-webpack-plugin": "2.3.5",
@@ -136,6 +140,14 @@
     ]
   },
   "babel": {
+    "plugins": [
+      [
+        "@babel/plugin-proposal-decorators",
+        {
+          "legacy": true
+        }
+      ]
+    ],
     "presets": [
       "react-app"
     ]

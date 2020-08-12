@@ -7,7 +7,7 @@ import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 
 ReactDOM.render(
-    <Provider rootStore={UploadStore}>
+    <Provider uploadStore={UploadStore}>
         <App />
     </Provider>,
     document.getElementById("root")

@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { Upload, message } from "antd";
+// import SparkMD5 from "spark-md5";
+import { inject, observer   } from "mobx-react";
 import { InboxOutlined } from "@ant-design/icons";
 import styled from "styled-components";
 
@@ -7,26 +9,25 @@ const Wrapper = styled.div`
     width: 400px;
 `
 
-const { Dragger } = Upload;
-const props = {
-  name: "file",
-  multiple: true,
-  action: "",
-  onChange(info) {
-    const { status } = info.file;
-    if (status !== "uploading") {
-      console.log(info.file, info.fileList);
-    }
-    if (status === "done") {
-      message.success(`${info.file.name} file uploaded successfully.`);
-    } else if (status === "error") {
-      message.error(`${info.file.name} file upload failed.`);
-    }
-  },
-};
-
+@inject("uploadStore")
+@observer
 class App extends Component {
     render() {
+        const { uploadFile } = this.props.uploadStore;
+        const { Dragger } = Upload;
+        const props = {
+            multiple: true,
+            customRequest: obj => uploadFile(obj),
+            onChange: info => {
+                const { status } = info.file;
+                if (status === "done") {
+                    message.success(`${info.file.name} file uploaded successfully.`);
+                } else if (status === "error") {
+                    message.error(`${info.file.name} file upload failed.`);
+                }
+            },
+        };
+
         return (
             <Wrapper>
                 <Dragger {...props}>
