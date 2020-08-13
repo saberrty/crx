@@ -22,10 +22,19 @@ class UploadStore {
             const file = toJS(chunk.file);
             let formData = new FormData();
             formData.append("file", file, f.model.name);
-            let request = new XMLHttpRequest();
-            request.open("POST", "http://localhost:3000/users/file");
-            request.send(formData);
-            return Promise.resolve();
+            return new Promise((res, rej) => {
+                let request = new XMLHttpRequest();
+                request.open("POST", "http://localhost:3000/users/file");
+                // request.open("POST", "/users/file"); //dev proxy
+                request.onload = () => {
+                    if (request.status >= 200 && request.status < 300) {
+                        res(request.response);
+                    } else {
+                        rej(request.statusText);
+                    }
+                };
+                request.send(formData);
+            })
             // return Api.request({
             //     method: "post",
             //     url: "/users/file",
@@ -37,12 +46,14 @@ class UploadStore {
         const loop = () => {
             uploadReq(chunks[f.curChunk]).then(() => {
                 f.curChunk++;
-                if (f.curChunk < chunksSize) {
+                if (f.curChunk < chunksSize && !f.pause) {
                     loop();
                 }
             })
         }
-        loop();
+        if (f.curChunk < chunksSize && !f.pause) {
+            loop();
+        }
     }
 }
 

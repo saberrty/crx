@@ -18,6 +18,8 @@ class UploadStore {
     @observable
     curChunk = 0;
 
+    @observable pause = false;
+
     constructor({ file, rootStore }) {
         this.model = file;
         this.rootStore = rootStore;
@@ -31,6 +33,14 @@ class UploadStore {
         while (start < this.model.size) {
             this.chunks.push({ file: this.model.slice(start, start + chunkSize) });
             start += chunkSize;
+        }
+    }
+
+    @action.bound
+    setPause() {
+        this.pause = !this.pause;
+        if (!this.pause) {
+            this.rootStore.uploadLoop(this);
         }
     }
 }

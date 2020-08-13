@@ -13,7 +13,7 @@ const Wrapper = styled.div`
 @observer
 class App extends Component {
     render() {
-        const { uploadFile } = this.props.uploadStore;
+        const { uploadFile, files } = this.props.uploadStore;
         const { Dragger } = Upload;
         const props = {
             multiple: true,
@@ -26,6 +26,11 @@ class App extends Component {
                     message.error(`${info.file.name} file upload failed.`);
                 }
             },
+            onRemove: f => {
+                const file = files.find(v => v.model.uid === f.uid);
+                file.setPause();
+                return false;
+            }
         };
 
         return (
