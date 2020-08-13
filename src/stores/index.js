@@ -23,7 +23,7 @@ class UploadStore {
             let formData = new FormData();
             formData.append("file", file, f.model.name);
             let request = new XMLHttpRequest();
-            request.open("POST", "/users/file");
+            request.open("POST", "http://localhost:3000/users/file");
             request.send(formData);
             return Promise.resolve();
             // return Api.request({

@@ -16,10 +16,16 @@
         "default_popup": "index.html"
     },
     "permissions": [
-        "alarms", "tabs", "notifications"
+        "alarms",
+        "tabs",
+        "notifications",
+        "background",
+        "webRequest",
+        "nativeMessaging",
+        "http://*/"
     ],
     "background": {
-        "persistent": false,
+        "persistent": true,
         "scripts": [
             "background.js"
         ]
